@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: listener_edi_sterlingarchive
+  cloud:
+    config:
+      uri: http://configuration-dev.nonprod.jbhunt.com/ws_infrastructure_configuration
+      fail-fast: true
+
+
+server:
+  servlet:
+    context-path: /${spring.application.name}
+
+info:
+  build:
+    artifact: ${spring.application.name}
+    description: 'EDI Archival Listener'
+    name: ${spring.application.name}
+
+---
+spring:
+  profiles: DEV
+  cloud:
+    config:
+     uri: http://configuration-dev.nonprod.jbhunt.com/ws_infrastructure_configuration
+---
+spring:
+  profiles: TEST
+  cloud:
+    config:
+      uri: http://configuration-tst.nonprod.jbhunt.com/ws_infrastructure_configuration
+---
+spring:
+  profiles: QA
+  cloud:
+    config:
+      uri: http://configuration.jbhunt.com/ws_infrastructure_configuration
+---
+spring:
+  profiles: PROD
+  cloud:
+    config:
+      uri: http://configuration.jbhunt.com/ws_infrastructure_configuration
+
+...
